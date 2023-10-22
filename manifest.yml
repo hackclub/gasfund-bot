@@ -1,0 +1,31 @@
+display_information:
+  name: gas fund dev
+  description: gas fund testing
+  background_color: "#1a1816"
+features:
+  app_home:
+    home_tab_enabled: true
+    messages_tab_enabled: false
+    messages_tab_read_only_enabled: true
+  bot_user:
+    display_name: gas fund dev
+    always_online: true
+oauth_config:
+  scopes:
+    user:
+      - channels:history
+    bot:
+      - channels:history
+      - chat:write
+      - reactions:write
+      - commands
+settings:
+  event_subscriptions:
+    request_url: https://3437-108-60-243-43.ngrok-free.app
+    user_events:
+      - message.channels
+    bot_events:
+      - message.channels
+  org_deploy_enabled: false
+  socket_mode_enabled: false
+  token_rotation_enabled: false
