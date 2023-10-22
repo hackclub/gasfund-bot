@@ -12,11 +12,27 @@ async function sendGasMessage(channelId) {
     await app.client.chat.postMessage({
       token: process.env.SLACK_BOT_TOKEN,
       channel: channelId,
-      text: 'gas',
+      text: 'gas button:',
+      blocks: [
+        {
+          type: 'actions',
+          elements: [
+            {
+              type: 'button',
+              text: {
+                type: 'plain_text',
+                text: 'Reimburse me!',
+              },
+              action_id: 'gas_button_click',
+              style: 'primary',
+            },
+          ],
+        },
+      ],
     });
-    console.log('Sent "gas" message');
+    console.log('gas button sent');
   } catch (error) {
-    console.error('Error sending "gas" message:', error);
+    console.error('Error sending "gas button" message:', error);
   }
 }
 
@@ -26,7 +42,12 @@ async function sendGasMessage(channelId) {
 
   const channelId = 'gas-fund-dev';
 
+  app.action('gas_button_click', async ({ ack, body }) => {
+    ack();
+    sendGasMessage(channelId);
+  });
+
   setInterval(() => {
     sendGasMessage(channelId);
-  }, 2000); 
+  }, 200000);
 })();
