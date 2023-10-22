@@ -18,17 +18,18 @@ oauth_config:
       - channels:history
       - chat:write
       - reactions:write
+      - chat:write.customize
 settings:
   event_subscriptions:
-    request_url: https://3437-108-60-243-43.ngrok-free.app
+    request_url: https://71ff-108-60-243-43.ngrok-free.app/slack/events
     user_events:
       - message.channels
     bot_events:
       - message.channels
   interactivity:
     is_enabled: true
-    request_url: https://3437-108-60-243-43.ngrok-free.app
-    message_menu_options_url: https://3437-108-60-243-43.ngrok-free.app
+    request_url: https://71ff-108-60-243-43.ngrok-free.app
+    message_menu_options_url: https://71ff-108-60-243-43.ngrok-free.app
   org_deploy_enabled: false
   socket_mode_enabled: false
   token_rotation_enabled: false
