@@ -45,7 +45,7 @@ app.action('gas_button_click', async ({ ack, body }) => {
 });
 
 app.event("message", async ({ event }) => {
-  if (event.text.contains("gas) && event.channel_id === channelId) {
+  if (event.text.contains("gas && event.channel_id === channelId")) {
     sendGasMessage(channelId, event.ts);
   }
 });
@@ -54,7 +54,5 @@ app.event("message", async ({ event }) => {
   await app.start(process.env.PORT || 3000);
   console.log('⚡️ Bolt app is running!');
 
-  setInterval(() => {
-    sendGasMessage(channelId);
-  }, 200000);
+
 })();
