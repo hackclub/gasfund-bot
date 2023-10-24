@@ -10,38 +10,40 @@ const app = new App({
   logLevel: 'debug',
 });
 
-app.message('gas', async ({ message, say, client }) => {
-  const gasButton = {
-    blocks: [
-      {
-        type: 'actions',
-        elements: [
-          {
-            type: 'button',
-            text: {
-              type: 'plain_text',
-              text: 'Reimburse me!',
+app.message(/^gas$/, async ({ message, say, client }) => {
+  if (message.thread_ts === undefined) {
+    const gasButton = {
+      blocks: [
+        {
+          type: 'actions',
+          elements: [
+            {
+              type: 'button',
+              text: {
+                type: 'plain_text',
+                text: 'Reimburse me!',
+              },
+              action_id: "gas_button",
+              style: 'primary',
             },
-            action_id: "gas_button",
-            style: 'primary',
-          },
-        ],
-      },
-    ],
-    thread_ts: message.ts,
-  };
+          ],
+        },
+      ],
+      thread_ts: message.ts,
+    };
 
-  await say(gasButton);
+    await say(gasButton);
 
-  try {
-    await client.reactions.add({
-      token: process.env.SLACK_BOT_TOKEN,
-      name: 'fuelpump', 
-      channel: message.channel,
-      timestamp: message.ts,
-    });
-  } catch (error) {
-    console.error('Error adding reaction:', error);
+    try {
+      await client.reactions.add({
+        token: process.env.SLACK_BOT_TOKEN,
+        name: 'fuelpump', 
+        channel: message.channel,
+        timestamp: message.ts,
+      });
+    } catch (error) {
+      console.error('Error adding reaction:', error);
+    }
   }
 });
 
