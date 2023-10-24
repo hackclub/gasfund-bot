@@ -25,6 +25,7 @@ app.message(/^gas$/, async ({ message, say, client }) => {
               },
               action_id: "gas_button",
               style: 'primary',
+              url: 'https://airtable.com/appl0Cy5w1E1HzAkm/shr4bdxCGzIsN5TiC',
             },
           ],
         },
