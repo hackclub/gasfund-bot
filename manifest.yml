@@ -21,8 +21,15 @@ oauth_config:
       - chat:write
       - chat:write.customize
       - groups:history
-      - reactions:write
       - groups:read
+      - im:history
+      - im:read
+      - im:write
+      - metadata.message:read
+      - reactions:write
+      - mpim:write
+      - mpim:read
+      - mpim:history
 settings:
   event_subscriptions:
     request_url: https://71ff-108-60-243-43.ngrok-free.app/slack/events
@@ -31,10 +38,11 @@ settings:
     bot_events:
       - message.channels
       - message.groups
+      - message.im
   interactivity:
     is_enabled: true
     request_url: https://71ff-108-60-243-43.ngrok-free.app
     message_menu_options_url: https://71ff-108-60-243-43.ngrok-free.app
   org_deploy_enabled: false
-  socket_mode_enabled: false
+  socket_mode_enabled: true
   token_rotation_enabled: false

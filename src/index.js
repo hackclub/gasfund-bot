@@ -1,51 +1,47 @@
 require('dotenv').config();
 
-const { App, ExpressReceiver } = require('@slack/bolt');
+const { App } = require('@slack/bolt');
 
-const expressReceiver = new ExpressReceiver({ signingSecret: process.env.SLACK_SIGNING_SECRET });
 const app = new App({
   token: process.env.SLACK_BOT_TOKEN,
   signingSecret: process.env.SLACK_SIGNING_SECRET,
-  receiver: expressReceiver,
+  appToken: process.env.SOCKET_TOKEN,
+  socketMode: true,
   logLevel: 'debug',
 });
 
-
-async function sendGasMessage(channelId, ts) {
-  try {
-    await app.client.chat.postMessage({
-      token: process.env.SLACK_BOT_TOKEN,
-      channel: channelId || "gas-fund-dev",
-      text: 'gas button:',
-      thread_ts: ts,
-      blocks: [
-        {
-          type: 'actions',
-          elements: [
-            {
-              type: 'button',
-              text: {
-                type: 'plain_text',
-                text: 'Reimburse me!',
-              },
-              action_id: 'gas_button_click',
-              style: 'primary',
+app.message('deez', async ({ message, say, client }) => {
+  const gasButton = {
+    blocks: [
+      {
+        type: 'actions',
+        elements: [
+          {
+            type: 'button',
+            text: {
+              type: 'plain_text',
+              text: 'Reimburse me!',
             },
-          ],
-        },
-      ],
+            action_id: "gas_button",
+            style: 'primary',
+          },
+        ],
+      },
+    ],
+    thread_ts: message.ts,
+  };
+
+  await say(gasButton);
+
+  try {
+    await client.reactions.add({
+      token: process.env.SLACK_BOT_TOKEN,
+      name: 'fuelpump', 
+      channel: message.channel,
+      timestamp: message.ts,
     });
-    console.log('gas button sent');
   } catch (error) {
-    console.error('Error sending "gas button" message:', error);
-  }
-}
-
-app.message(async ({ message }) => {
-  console.log('Received message:', message.text, 'in channel', message.channel);
-
-  if (message.text && message.text.toLowerCase().includes('gas')) {
-    sendGasMessage(message.channel, message.ts);
+    console.error('Error adding reaction:', error);
   }
 });
 
