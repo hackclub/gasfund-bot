@@ -10,7 +10,7 @@ const app = new App({
   logLevel: 'debug',
 });
 
-app.message('deez', async ({ message, say, client }) => {
+app.message('gas', async ({ message, say, client }) => {
   const gasButton = {
     blocks: [
       {
