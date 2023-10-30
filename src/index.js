@@ -38,7 +38,7 @@ app.message(/^gas$/, async ({ message, say, client }) => {
     try {
       await client.reactions.add({
         token: process.env.SLACK_BOT_TOKEN,
-        name: 'fuelpump', 
+        name: 'fuelpump',
         channel: message.channel,
         timestamp: message.ts,
       });
@@ -46,6 +46,13 @@ app.message(/^gas$/, async ({ message, say, client }) => {
       console.error('Error adding reaction:', error);
     }
   }
+});
+
+app.message(/^review$/, async ({ message, say }) => {
+  await say({
+    text: "Your application has been submitted! We'll review it and post in this thread within 24 hours.",
+    thread_ts: message.ts,
+  });
 });
 
 (async () => {

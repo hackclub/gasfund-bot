@@ -1,6 +1,6 @@
 display_information:
-  name: gas fund dev
-  description: gas fund testing
+  name: gas fund
+  description: reimbursing people to go to hackathons
   background_color: "#1a1816"
 features:
   app_home:
@@ -8,8 +8,8 @@ features:
     messages_tab_enabled: false
     messages_tab_read_only_enabled: true
   bot_user:
-    display_name: gas fund dev
-    always_online: true
+    display_name: gas fund
+    always_online: false
 oauth_config:
   scopes:
     user:
@@ -32,7 +32,6 @@ oauth_config:
       - mpim:history
 settings:
   event_subscriptions:
-    request_url: https://71ff-108-60-243-43.ngrok-free.app/slack/events
     user_events:
       - message.channels
     bot_events:
