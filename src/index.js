@@ -1,6 +1,7 @@
 require('dotenv').config();
 
 const { App } = require('@slack/bolt');
+const reviewApp = require("./review/info"); 
 
 const app = new App({
   token: process.env.SLACK_BOT_TOKEN,
@@ -10,7 +11,7 @@ const app = new App({
   logLevel: 'debug',
 });
 
-app.message(/^gas$/, async ({ message, say, client }) => {
+app.message(/^test$/, async ({ message, say, client }) => {
   if (message.thread_ts === undefined) {
     const gasButton = {
       blocks: [
@@ -23,9 +24,8 @@ app.message(/^gas$/, async ({ message, say, client }) => {
                 type: 'plain_text',
                 text: 'Reimburse me!',
               },
-              action_id: "gas_button",
+              action_id: "review_button", 
               style: 'primary',
-              url: 'https://airtable.com/appl0Cy5w1E1HzAkm/shr4bdxCGzIsN5TiC',
             },
           ],
         },
@@ -47,6 +47,10 @@ app.message(/^gas$/, async ({ message, say, client }) => {
     }
   }
 });
+
+app.action('review_button', reviewApp.handleInfoButton); 
+
+app.view('modal', reviewApp.handleInfoButton);
 
 app.message(/^review$/, async ({ message, say }) => {
   await say({
