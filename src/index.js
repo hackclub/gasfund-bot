@@ -55,9 +55,9 @@ app.action('rem_button', handleRemButton);
 app.action('rev_button', handleReviewButton);
 
 
-app.view('modal-callback-3', handleInfoButton);
-app.view('modal-callback-2', handleReviewButton);
-app.view('modal-callback-1', handleRemButton);
+app.view('modal-callback', handleInfoButton);
+app.view('modal-callback-1', handleReviewButton);
+app.view('modal-callback-2', handleRemButton);
 
 
 (async () => {
