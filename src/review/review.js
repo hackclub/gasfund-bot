@@ -54,7 +54,7 @@ const handleReviewButton = async ({ ack, body, client }) => {
             type: 'plain_text',
             text: 'Attach Selfie',
           },
-          url: 'https://example.com/', 
+          url: 'http://127.0.0.1:5500/src/review/selfie.html', 
         },
       },
       {
@@ -114,9 +114,9 @@ const handleReviewButton = async ({ ack, body, client }) => {
           action_id: 'button_open_url',
           text: {
             type: 'plain_text',
-            text: 'Attach Selfie',
+            text: 'Attach Screenshot',
           },
-          url: 'https://example.com/', 
+          url: 'http://127.0.0.1:5500/src/review/gas.html', 
         },
       },
     ],
