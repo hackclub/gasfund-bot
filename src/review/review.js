@@ -99,7 +99,7 @@ const handleReviewButton = async ({ ack, body, client }) => {
         },
         label: {
           type: 'plain_text',
-          text: 'How much did you spend on gas for your journey?\nPlease use https://www.calculator.net/fuel-cost-calculator.html, we\'ll ask you to submit a screenshot of this page in the next question.',
+          text: 'How much did you spend on gas for your journey?\nPlease use <https://www.calculator.net/fuel-cost-calculator.html> , we\'ll ask you to submit a screenshot of this page in the next question.',
         },
       },
       {
@@ -136,20 +136,7 @@ const handleReviewButton = async ({ ack, body, client }) => {
   }
 };
 
-const handleModal = async ({ ack, body, view }) => {
-  await ack();
-
-  const submittedData = view.state.values;
-  const amount = submittedData.amount.input_amount.value;
-
-  await reviewApp.client.chat.postMessage({
-    token: process.env.SLACK_BOT_TOKEN,
-    channel: body.user.id,
-    text: `Your reimbursement request for $${amount} has been submitted.`,
-  });
-};
 
 module.exports = {
   handleReviewButton,
-  handleModal,
 };

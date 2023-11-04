@@ -73,7 +73,7 @@ const handleRemButton = async ({ ack, body, client }) => {
       view: remmodalView,
     });
   } catch (error) {
-    console.error('Error opening step 2 modal:', error);
+    console.error('Error opening modal:', error);
   };
 };
   
