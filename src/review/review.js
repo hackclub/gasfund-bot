@@ -11,9 +11,9 @@ const reviewApp = new App({
 const handleReviewButton = async ({ ack, body, client }) => {
   await ack();
 
-  const modalView = {
+  const revmodalView = {
     type: 'modal',
-    callback_id: 'modal-callback', 
+    callback_id: 'modal-callback-2', 
     title: {
       type: 'plain_text',
       text: 'The Gas Fund 2/3',
@@ -129,7 +129,7 @@ const handleReviewButton = async ({ ack, body, client }) => {
   try {
     await client.views.open({
       trigger_id: body.trigger_id,
-      view: modalView,
+      view: revmodalView,
     });
   } catch (error) {
     console.error('Error opening modal:', error);

@@ -5,7 +5,7 @@ const handleInfoButton = async ({ ack, body, client }) => {
 
   const modalView = {
     type: 'modal',
-    callback_id: 'modal-callback',
+    callback_id: 'modal-callback-1',
     title: {
       type: 'plain_text',
       text: 'The Gas Fund 1/3',

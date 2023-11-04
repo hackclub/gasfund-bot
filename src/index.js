@@ -1,7 +1,9 @@
 require('dotenv').config();
 
 const { App } = require('@slack/bolt');
-const reviewApp = require("./review/info"); 
+const {handleInfoButton} = require("./review/info"); 
+const {handleReviewButton} = require("./review/review");
+const {handleRemButton} = require("./review/rem");
 
 const app = new App({
   token: process.env.SLACK_BOT_TOKEN,
@@ -48,16 +50,15 @@ app.message(/^test$/, async ({ message, say, client }) => {
   }
 });
 
-app.action('review_button', reviewApp.handleInfoButton); 
+app.action('review_button', handleInfoButton); 
+app.action('rem_button', handleRemButton); 
+app.action('rev_button', handleReviewButton);
 
-app.view('modal', reviewApp.handleInfoButton);
 
-app.message(/^review$/, async ({ message, say }) => {
-  await say({
-    text: "Your application has been submitted! We'll review it and post in this thread within 24 hours.",
-    thread_ts: message.ts,
-  });
-});
+app.view('modal-callback-3', handleInfoButton);
+app.view('modal-callback-2', handleReviewButton);
+app.view('modal-callback-1', handleRemButton);
+
 
 (async () => {
   await app.start(process.env.PORT || 3000);

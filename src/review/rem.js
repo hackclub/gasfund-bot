@@ -3,12 +3,12 @@ const { App } = require('@slack/bolt');
 const handleRemButton = async ({ ack, body, client }) => {
     await ack();
     
-    const modalView = {
+    const remmodalView = {
         type: 'modal',
-        callback_id: 'modal-callback', 
+        callback_id: 'modal-callback-3', 
         title: {
           type: 'plain_text',
-          text: 'The Gas Fund 2/3',
+          text: 'The Gas Fund 3/3',
         },
         blocks: [
           {
@@ -65,9 +65,19 @@ const handleRemButton = async ({ ack, body, client }) => {
           text: 'Submit',
         }
       };
+ 
+
+  try {
+    await client.views.open({
+      trigger_id: body.trigger_id,
+      view: remmodalView,
+    });
+  } catch (error) {
+    console.error('Error opening step 2 modal:', error);
   };
+};
   
   module.exports = {
-    handleRemButton,
+    handleRemButton, 
   };
   
